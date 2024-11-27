@@ -14,7 +14,7 @@ const mensajes = [
     ],
     [
         "Al producir una monografía, es necesario que te tomes el tiempo de buscar las fuentes bibliográficas pertinentes, citar de la manera correcta y desarrollar tu propio texto.",
-        "Si al producir una monografía utilizas texto de otra persona como propio, se considera plagio. Esta es una falta grave a nivel universitario y tiene una determinada sanción si es detectado. ** Si cometes una falta de este tipo, la facultad debe aplicar el reglamento. En este caso, se corresponde a los artículos 8 y 9."
+        "Si al producir una monografía utilizas texto de otra persona como propio, se considera plagio. Esta es una falta grave a nivel universitario y tiene una determinada sanción si es detectado. <strong>** Si cometes una falta de este tipo, la facultad debe aplicar el reglamento. En este caso, se corresponde a los artículos 8 y 9.</strong>"
     ]
 ];
 
@@ -24,13 +24,21 @@ let currentMessageIndexes = [0, 0, 0, 0];
 // Función para cambiar el mensaje y girar la moneda
 function flipCoin(event) {
     const coin = event.currentTarget;
+   // Detener la animación inicial si sigue activa
+   if (getComputedStyle(coin).animationName === "spin") {
+    coin.style.animation = "none"; // Detenemos la animación inicial
+    coin.style.transform = ""; // Eliminamos transform en línea
+}
+
+// Alternar la clase is-flipped para ejecutar el giro
+coin.classList.toggle("is-flipped");
+
     // Obtiene el índice de la moneda en la lista
     const coinIndex = Array.from(document.querySelectorAll(".flipping-coin")).indexOf(coin);
     const container = document.querySelectorAll(".mensajes-reglamento")[coinIndex]; // Selecciona solo el contenedor correspondiente
     const mensajeDiv = coin.nextElementSibling.querySelector(".mensaje p");
+
     
-    // Gira la moneda
-    coin.classList.toggle("is-flipped");
     // Si la moneda tiene la clase "is-flipped", cambia la clase del contenedor específico
     if (coin.classList.contains("is-flipped")) {
         setTimeout(() => {
@@ -53,7 +61,7 @@ function flipCoin(event) {
         currentMessageIndexes[coinIndex] = (currentMessageIndexes[coinIndex] + 1) % mensajes[coinIndex].length;
         
         // Cambia el contenido del mensaje
-        mensajeDiv.textContent = mensajes[coinIndex][currentMessageIndexes[coinIndex]];
+        mensajeDiv.innerHTML = mensajes[coinIndex][currentMessageIndexes[coinIndex]];
 
         // Elimina la clase fade-out y aplica fade-in
         mensajeDiv.classList.remove("fade-out");
