@@ -35,12 +35,14 @@ function flipCoin(event) {
     if (coin.classList.contains("is-flipped")) {
         setTimeout(() => {
             container.classList.toggle("mensajes-reglamento-2");
-        }, 800);
+            container.classList.remove("mensajes-reglamento-reverse");
+        }, 200);
     } else {
         // Si la moneda ya no tiene la clase "is-flipped", remueve la clase adicional del contenedor
         setTimeout(()=>{
+            container.classList.add("mensajes-reglamento-reverse");
             container.classList.remove("mensajes-reglamento-2");
-        }, 700);
+        }, 200);
     }
     // Aplica fade-out al mensaje actual
     mensajeDiv.classList.add("fade-out");
@@ -69,3 +71,15 @@ function flipCoin(event) {
 document.querySelectorAll(".flipping-coin").forEach(coin => {
     coin.addEventListener("click", flipCoin);
 });
+
+
+
+
+
+
+
+
+
+
+
+

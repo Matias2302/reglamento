@@ -341,26 +341,26 @@ main{
     display:flex;
     flex-direction:column;
     border-radius: 10px;
-    background-color: #f0f0f0;
-    transition: background .8s ease-in; /* Transición de 0.5 segundos */
+    transition: background .5s ease-in-out; /* Transición de 0.5 segundos */
     background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(51,204,102,0.24693627450980393) 100%);
     border: 1px solid #33CC66;
     padding:1rem;
     margin:1rem 0 1rem 0;
     align-items: center;
+    animation: none; /* Sin animación inicial */
+    animation-fill-mode: forwards; /* Mantiene el estado final */
+    transition: border-color 0.5s ease-in-out; /* Transición para el borde */
+    z-index: 1000;
 }
 
 .mensajes-reglamento-2{
-    display:flex;
-    flex-direction:column;
-    border-radius: 10px;
-    background: rgb(255,255,255);
-    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(252,85,34,1) 100%);
+    animation: smooth-gradient 1s ease-in-out forwards; /* Duración de 1 segundo */
     border: 1px solid #fc5522;
-    padding:1rem;
-    margin:1rem 0 1rem 0;
-    transition: transform 0.8s;
-    align-items: center;
+}
+
+/* Clase inversa para revertir la animación */
+.mensajes-reglamento-reverse {
+    animation: smooth-gradient-reverse 1s ease-in-out forwards; /* Animación inversa */
 }
 
 .mensaje p {
@@ -387,6 +387,42 @@ main{
 
 .fade-in {
     opacity: 1; /* Mostrar */
+}
+
+/* Definimos la animación */
+@keyframes smooth-gradient {
+    0% {
+        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(51, 204, 102, 0.25) 100%);
+        border-color: #33CC66;
+    }
+    50% {
+        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(128, 128, 128, 0.25) 100%); /* Color intermedio */
+        border-color: #808080; /* Bordes grises intermedios */
+    }
+    100% {
+        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(252, 85, 34, 0.25) 100%);
+        border-color: #FC5522;
+    }
+}
+
+/* Animación hacia atrás */
+@keyframes smooth-gradient-reverse {
+    0% {
+        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(252, 85, 34, 0.25) 100%);
+        border-color: #FC5522;
+    }
+    50% {
+        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(128, 128, 128, 0.25) 100%);
+        border-color: #808080;
+    }
+    100% {
+        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(51, 204, 102, 0.25) 100%);
+        border-color: #33CC66;
+    }
+}
+
+.mensajes-reglamento-reverse {
+    animation: smooth-gradient-reverse 1s ease-in-out forwards; /* Animación inversa */
 }
 
 .flipping-coin div {
@@ -448,7 +484,7 @@ main{
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: #FF9900; /* Color del borde */
+    background: linear-gradient(90deg, rgba(51,204,102,1) 0%, rgba(252,85,34,1) 100%); /* Color del borde */
     transform: translateZ(-10px); /* Grosor hacia atrás */
 }
 
@@ -457,7 +493,7 @@ main{
     position: absolute;
     width: 100%;
     height: 100%;
-    background: #FF9900; /* Color del borde */
+    background: linear-gradient(90deg, rgba(51,204,102,1) 0%, rgba(252,85,34,1) 100%); /* Color del borde */
     transform: rotateY(90deg); /* Hace visible el borde lateral */
     transform-origin: center;
 }
@@ -530,6 +566,7 @@ footer{
         justify-content: space-between;
         align-items: center;
         padding: 1rem;
+        z-index: 99999;
     }
 
     .logo{
@@ -602,7 +639,7 @@ footer{
     }
     
     .hero-text p {
-        font-size: 1.5rem;
+        font-size: 1.15rem;
     }
 /*==================*/
 /*===Coins y situaciones===*/
@@ -663,10 +700,10 @@ footer{
 
 @media (max-width:1400px) and (min-width:768px){
     .coin{
-        transform: translate(62%, -14%) rotate(-118deg);
+        transform: translate(62%, -18%) rotate(-118deg);
     }
     .coin-2{
-        transform: translate(60%, -17%) rotate(-118deg);
+        transform: translate(60%, -20%) rotate(-118deg);
     }
 }
 
