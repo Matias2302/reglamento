@@ -24,13 +24,14 @@ let currentMessageIndexes = [0, 0, 0, 0];
 // Función para cambiar el mensaje y girar la moneda
 function flipCoin(event) {
     const coin = event.currentTarget;
-   // Detener la animación inicial si sigue activa
-   if (getComputedStyle(coin).animationName === "spin") {
-    coin.style.animation = "none"; // Detenemos la animación inicial
-    coin.style.transform = ""; // Eliminamos transform en línea
+// Detener la animación inicial 'spin' si está en curso
+if (getComputedStyle(coin).animationName === "spin") {
+    coin.style.animation = "none"; // Detener la animación
+    // Forzar un reflujo (recalcular el layout) para permitir el siguiente cambio de transform
+    void coin.offsetWidth; // Forzamos al navegador a recalcular el layout
 }
 
-// Alternar la clase is-flipped para ejecutar el giro
+// Alternar la clase 'is-flipped' para ejecutar la animación de giro
 coin.classList.toggle("is-flipped");
 
     // Obtiene el índice de la moneda en la lista
